@@ -23,6 +23,7 @@ class SignupForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
+    this.props.userSignupRequest(this.state);
 
     console.log(this.state);
   }
@@ -96,6 +97,10 @@ class SignupForm extends React.Component {
       </form>
     );
   }
+}
+
+SignupForm.propTypes = {
+  userSignupRequest: React.PropTypes.func.isRequired
 }
 
 export default SignupForm;
