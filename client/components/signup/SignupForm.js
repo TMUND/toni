@@ -4,6 +4,7 @@ import map from 'lodash/map';
 import classnames from 'classnames';
 import validateInput from '../../../server/shared/validations/signup';
 import TextFieldGroup from '../common/TextFieldGroup';
+import { browserHistory } from 'react-router';
 
 
 class SignupForm extends React.Component {
@@ -18,6 +19,9 @@ class SignupForm extends React.Component {
       errors: {},
       isLoading: false
     }
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(e) {
@@ -46,7 +50,10 @@ class SignupForm extends React.Component {
       });
 
       this.props.userSignupRequest(this.state).then(
-        () => {}, // If there are no errors on the form do something
+        // If there are no errors on the form do something
+        () => {
+          browserHistory.push('/');
+        },
         ({ data }) => this.setState({
           errors: data, // If there are errors from sign up form, show errors
           isLoading: false
